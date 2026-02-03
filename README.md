@@ -1,6 +1,6 @@
 # Installation
 
-Add this to your `project/plugins.sbt` and replace `version` with
+Add this to your `project/plugins.sbt` and replace `version`:
 
 ```scala
 libraryDependencies += "com.github.japgolly.sbt-docker-compose-env" %% "sbt-docker-compose-env" % version
