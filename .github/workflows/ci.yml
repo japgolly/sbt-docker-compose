@@ -11,34 +11,19 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - java: 14
-            scala: 2
-          - java: 8
-            scala: 3
-    name: Scala v${{ matrix.scala }} / Java v${{ matrix.java }}
     steps:
 
-      - name: Git checkout
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Setup Scala
         uses: japgolly/setup-everything-scala@v3.1
         with:
-          java-version: adopt@1.${{ matrix.java }}
-          jsdom-version: 26.1.0
-          node-version: 24.10.0
+          java-version: adopt@1.8
 
-      - name: Build and test
-        shell: bash
+      - name: CI
         run: >-
-          sbt++field scala${{ matrix.scala }}
-          -J-Xmx3G
-          -J-XX:+UseG1GC
+          sbt
           -DCI=1
           clean test

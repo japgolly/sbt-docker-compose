@@ -19,14 +19,10 @@ jobs:
         uses: japgolly/setup-everything-scala@v3.1
         with:
           java-version: adopt@1.8
-          jsdom-version: 26.1.0
-          node-version: 24.10.0
 
       - name: Release
         run: >-
           sbt
-          -J-Xmx3G
-          -J-XX:+UseG1GC
           -DCI=1
           ci-release
         env:
