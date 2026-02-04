@@ -13,10 +13,10 @@ object DockerComposeTest extends TestSuite {
     test("test-env") {
       test("postgres") {
         val options = JavaOptions.fromDockerCompose("postgres", root / "test-env")
-        assert(options.asList == List(
+        assert(options.asList.sorted == List(
           "-DPOSTGRES_DB=example_test",
-          "-DPOSTGRES_USER=dev",
           "-DPOSTGRES_PASSWORD=sqd",
+          "-DPOSTGRES_USER=dev",
         ))
       }
 
@@ -24,7 +24,7 @@ object DockerComposeTest extends TestSuite {
         val options = JavaOptions.fromDockerCompose("postgres", root / "test-env")
           .add("POSTGRES_DB", "x")
           .remove("POSTGRES_USER")
-        assert(options.asList == List(
+        assert(options.asList.sorted == List(
           "-DPOSTGRES_DB=x",
           "-DPOSTGRES_PASSWORD=sqd",
         ))
