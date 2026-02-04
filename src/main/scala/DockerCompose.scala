@@ -83,7 +83,7 @@ object DockerCompose {
   }
 
   object Services {
-    def fromDockerCompose(dir: File, only: Iterable[String] = Nil): Services = {
+    def apply(dir: File, only: Iterable[String] = Nil): Services = {
       val dockerCompose = "docker-compose"
       val names = only.mkString(" ")
       def run(cmd: String) = Process(cmd, dir).!

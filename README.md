@@ -23,10 +23,12 @@ import japgolly.sbt.DockerCompose
 object DockerEnv {
 
   object test extends (Project => Project) {
-    private val services = DockerCompose.Services.fromDockerCompose(file("envs/test"))
+    // Load all services from ./envs/test/docker-compose.yml
+    private val services = DockerCompose.Services(file("envs/test"))
 
     override def apply(p: Project): Project =
       p.settings(
+        // Start services before running tests
         Test / testOptions += Tests.Setup(services.start),
       )
   }
